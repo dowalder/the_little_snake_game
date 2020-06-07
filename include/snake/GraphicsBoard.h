@@ -3,6 +3,8 @@
 #include "nana/gui.hpp"
 #include "nana/paint/graphics.hpp"
 
+#include "snake/Types.h"
+
 namespace snake {
 
 class BoardPixel {
@@ -19,7 +21,7 @@ class BoardPixel {
         EMPTY
     };
 
-    void setPixel(State newState) {
+    void set(State newState) {
         state = newState;
     }
 
@@ -82,8 +84,8 @@ class GraphicsBoard {
         });
     }
 
-    BoardPixel& getPixel(int w, int h) {
-        return pixels.at(h * height + width);
+    BoardPixel& getPixel(const Point& p) {
+        return pixels.at(p.x * height + p.y);
     }
 
     int getWidth() const { return width; }
