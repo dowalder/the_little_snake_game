@@ -14,7 +14,7 @@ TEST(utils, incrementPointToPoint) {
 
     start = {24, 17};
     end = {24, 0};
-    ASSERT_EQ(incrementPointTowardsPoint(start, end), Point (24, 16));
+    ASSERT_EQ(incrementPointTowardsPoint(start, end), Point(24, 16));
 
     end = start;
     ASSERT_EQ(incrementPointTowardsPoint(start, end), start);
@@ -27,7 +27,14 @@ TEST(utils, incrementPointToPoint) {
         ++counter;
     }
     ASSERT_EQ(counter, 12);
-}  
+}
+
+TEST(utils, incrementPointWithStep) {
+    ASSERT_EQ(incrementPointWithStep(Point(12, 1), Direction::LEFT), Point(11, 1));
+    ASSERT_EQ(incrementPointWithStep(Point(43, 12), Direction::RIGHT), Point(44, 12));
+    ASSERT_EQ(incrementPointWithStep(Point(-3, -100), Direction::DOWN), Point(-3, -99));
+    ASSERT_EQ(incrementPointWithStep(Point(0, 0), Direction::UP), Point(0, -1));
+}
 
 }
 

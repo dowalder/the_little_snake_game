@@ -4,9 +4,9 @@ namespace snake {
 
 enum class Direction {
     LEFT,
-    TOP,
+    UP,
     RIGHT,
-    BOTTOM
+    DOWN
 };
 
 struct Point {

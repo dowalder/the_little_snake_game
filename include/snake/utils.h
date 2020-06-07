@@ -22,9 +22,9 @@ Point incrementPointWithStep(const Point& from, Direction stepDirection) {
             return {from.x - 1, from.y};
         case Direction::RIGHT:
             return {from.x + 1, from.y};
-        case Direction::BOTTOM:
+        case Direction::DOWN:
             return {from.x, from.y + 1};
-        case Direction::TOP:
+        case Direction::UP:
             return {from.x, from.y - 1};
         default:
             throw std::runtime_error("Unexpected direction.");
@@ -32,7 +32,7 @@ Point incrementPointWithStep(const Point& from, Direction stepDirection) {
 }
 
 bool pointInBoard(const GraphicsBoard& board, const Point& p) {
-    return 0 < p.x && p.x < board.getWidth() && 0 < p.y && p.y < board.getHeight();
+    return 0 <= p.x && p.x < board.getWidth() && 0 <= p.y && p.y < board.getHeight();
 }
 
 }

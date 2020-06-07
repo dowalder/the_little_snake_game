@@ -13,4 +13,4 @@ target_link_libraries(snake nana)
 enable_testing()
 add_executable(snake_unit_test test/snake_unit_test.cpp)
 
-target_link_libraries(snake_unit_test gtest pthread)
+target_link_libraries(snake_unit_test gtest pthread nana)
