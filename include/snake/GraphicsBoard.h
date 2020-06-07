@@ -27,6 +27,8 @@ class BoardPixel {
         state = newState;
     }
 
+    State getState() const { return state; }
+
     void draw(nana::paint::graphics& graph) {
 
         switch (state) {

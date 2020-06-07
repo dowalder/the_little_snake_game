@@ -1,5 +1,6 @@
 #pragma once
 #include "snake/Types.h"
+#include "snake/GraphicsBoard.h"
 
 namespace snake {
 
@@ -13,6 +14,25 @@ Point incrementPointTowardsPoint(const Point& from, const Point& to) {
     } else {
         return {from.x, from.y + sgn(to.y - from.y)};
     }
+}
+
+Point incrementPointWithStep(const Point& from, Direction stepDirection) {
+    switch (stepDirection) {
+        case Direction::LEFT:
+            return {from.x - 1, from.y};
+        case Direction::RIGHT:
+            return {from.x + 1, from.y};
+        case Direction::BOTTOM:
+            return {from.x, from.y + 1};
+        case Direction::TOP:
+            return {from.x, from.y - 1};
+        default:
+            throw std::runtime_error("Unexpected direction.");
+    }
+}
+
+bool pointInBoard(const GraphicsBoard& board, const Point& p) {
+    return 0 < p.x && p.x < board.getWidth() && 0 < p.y && p.y < board.getHeight();
 }
 
 }

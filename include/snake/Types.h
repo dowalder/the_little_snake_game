@@ -1,6 +1,14 @@
 #pragma once
 
 namespace snake {
+
+enum class Direction {
+    LEFT,
+    TOP,
+    RIGHT,
+    BOTTOM
+};
+
 struct Point {
     int x = 0;
     int y = 0;
