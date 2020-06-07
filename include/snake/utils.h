@@ -1,3 +1,4 @@
+#pragma once
 #include "snake/Types.h"
 
 namespace snake {
@@ -10,7 +11,7 @@ Point incrementPointTowardsPoint(const Point& from, const Point& to) {
     if (from.x != to.x) {
         return {from.x + sgn(to.x - from.x), from.y};
     } else {
-        return {from.y, from.y + sgn(to.y - from.y)};
+        return {from.x, from.y + sgn(to.y - from.y)};
     }
 }
 

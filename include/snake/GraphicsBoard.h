@@ -1,3 +1,5 @@
+ #pragma once
+
 #include <iostream>
 
 #include "nana/gui.hpp"

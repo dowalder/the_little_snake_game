@@ -1,3 +1,5 @@
+#pragma once
+
 #include "nana/paint/graphics.hpp"
 
 #include "snake/GraphicsBoard.h"
