@@ -2,6 +2,12 @@
 
 namespace snake {
 
+enum class StepResult {
+    INVALID_STEP,
+    STEPPED_INTO_FOOD,
+    STEPPED_INTO_EMPTY
+};
+
 enum class Direction {
     LEFT,
     UP,

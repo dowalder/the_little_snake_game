@@ -91,6 +91,9 @@ class GraphicsBoard {
     BoardPixel& getPixel(const Point& p) {
         return pixels.at(p.x * height + p.y);
     }
+    const BoardPixel& getPixel(const Point& p) const {
+        return pixels.at(p.x * height + p.y);
+    }
 
     int getWidth() const { return width; }
     int getHeight() const { return height; }

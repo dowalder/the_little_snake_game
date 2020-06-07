@@ -40,18 +40,26 @@ class BasicSnake {
         }
     }
 
-    bool step(Direction dir, GraphicsBoard& board, bool consumeFood = false){
+    StepResult step(Direction dir, GraphicsBoard& board, bool consumeFood = false) {
         bodyParts.emplace_front(incrementPointWithStep(head(), dir));
-        if (pointInBoard(board, head()) || board.getPixel(head()).getState() != BoardPixel::State::EMPTY) {
-            bodyParts.pop_front();
-            return false;
+
+        if (!validStepTarget(board, head())) {
+            return StepResult::INVALID_STEP;
         }
+
+        BoardPixel::State oldState = board.getPixel(head()).getState();
 
         board.getPixel(head()).set(BoardPixel::State::SNAKE);
 
         if (!consumeFood) {
             board.getPixel(tail()).set(BoardPixel::State::EMPTY);
             bodyParts.pop_back();
+        }
+
+        if (oldState == BoardPixel::State::FOOD) {
+            return StepResult::STEPPED_INTO_FOOD;
+        } else {
+            return StepResult::STEPPED_INTO_EMPTY;
         }
     }
 
@@ -74,6 +82,12 @@ class BasicSnake {
     // Changes to the snake are queued up here and can then later be written to the state.
     std::queue<GraphicsUpdate> graphicUpdates;
     std::deque<BodyPart> bodyParts;
+
+    bool validStepTarget(const GraphicsBoard& board, Point target) {
+        return pointInBoard(board, target) && 
+            (board.getPixel(target).getState() == BoardPixel::State::EMPTY 
+            || board.getPixel(target).getState() == BoardPixel::State::FOOD);
+    }
 };
 
 }
