@@ -68,7 +68,11 @@ void GraphicsBoard::update() const {
 }
 
 void GraphicsBoard::createPixels() {
-    graphics.resize({width * BoardTile::pixelSize, height * BoardTile::pixelSize});
+    graphics.resize({
+        static_cast<unsigned>(width * BoardTile::pixelSize), 
+        static_cast<unsigned>(height * BoardTile::pixelSize)
+        });
+        
     pixels.clear();
     pixels.reserve(height * width);
     for (int h = 0; h < height; ++h) {
