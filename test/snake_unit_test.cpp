@@ -36,6 +36,16 @@ TEST(utils, incrementPointWithStep) {
     ASSERT_EQ(incrementPointWithStep(Point(0, 0), Direction::UP), Point(0, -1));
 }
 
+TEST(utils, directionsAreOpposite) {
+    ASSERT_TRUE(directionsAreOpposite(Direction::UP, Direction::DOWN));
+    ASSERT_TRUE(directionsAreOpposite(Direction::DOWN, Direction::UP));
+    ASSERT_TRUE(directionsAreOpposite(Direction::LEFT, Direction::RIGHT));
+    ASSERT_TRUE(directionsAreOpposite(Direction::RIGHT, Direction::LEFT));
+    ASSERT_FALSE(directionsAreOpposite(Direction::UP, Direction::LEFT));
+    ASSERT_FALSE(directionsAreOpposite(Direction::UP, Direction::UP));
+    ASSERT_FALSE(directionsAreOpposite(Direction::UP, Direction::RIGHT));
+}
+
 }
 
 int main(int argc, char** argv) {

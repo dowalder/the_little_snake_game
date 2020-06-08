@@ -46,9 +46,6 @@ class BoardPixel {
         }
     }
 
-    // void drawConsumedFood() {}
-    // void drawLargeFood()
-
     static nana::color foregroundColor;
     static nana::color backgroundColor;
     static const int pixelSize = 25;
@@ -95,12 +92,16 @@ class GraphicsBoard {
         return pixels.at(p.x * height + p.y);
     }
 
+    void update() const {
+        drawing.update();
+    }
+
     int getWidth() const { return width; }
     int getHeight() const { return height; }
 
   private:
-    int height = 25;
-    int width = 25;
+    int height = 20;
+    int width = 20;
 
     nana::paint::graphics graphics;
     nana::drawing drawing;

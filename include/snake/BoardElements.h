@@ -31,7 +31,7 @@ class BasicSnake {
     }
 
     void initSnakeOnBoard(GraphicsBoard& board) const {
-        if (pointInBoard(board, head()) || pointInBoard(board, tail())) {
+        if (!pointInBoard(board, head()) || !pointInBoard(board, tail())) {
             throw std::runtime_error("Cannot draw snake: BasicSnake does not support overflowing coordinates.");
         }
 
@@ -40,8 +40,9 @@ class BasicSnake {
         }
     }
 
-    StepResult step(Direction dir, GraphicsBoard& board, bool consumeFood = false) {
+    StepResult step(Direction dir, GraphicsBoard& board) {
         bodyParts.emplace_front(incrementPointWithStep(head(), dir));
+        std::cout << "hello" << std::endl;
 
         if (!validStepTarget(board, head())) {
             return StepResult::INVALID_STEP;
@@ -51,14 +52,12 @@ class BasicSnake {
 
         board.getPixel(head()).set(BoardPixel::State::SNAKE);
 
-        if (!consumeFood) {
-            board.getPixel(tail()).set(BoardPixel::State::EMPTY);
-            bodyParts.pop_back();
-        }
-
         if (oldState == BoardPixel::State::FOOD) {
             return StepResult::STEPPED_INTO_FOOD;
         } else {
+            // only remove the tail when no food was consumed
+            board.getPixel(tail()).set(BoardPixel::State::EMPTY);
+            bodyParts.pop_back();
             return StepResult::STEPPED_INTO_EMPTY;
         }
     }

@@ -35,4 +35,20 @@ bool pointInBoard(const GraphicsBoard& board, const Point& p) {
     return 0 <= p.x && p.x < board.getWidth() && 0 <= p.y && p.y < board.getHeight();
 }
 
+bool directionsAreOpposite(Direction dir1, Direction dir2) {
+    switch (dir1) {
+        case Direction::DOWN:
+            return dir2 == Direction::UP;
+        case Direction::UP:
+            return dir2 == Direction::DOWN;
+        case Direction::LEFT:
+            return dir2 == Direction::RIGHT;
+        case Direction::RIGHT:
+            return dir2 == Direction::LEFT;
+        
+        default:
+            throw std::runtime_error("Impossible direction!");
+    }
+}
+
 }
