@@ -37,8 +37,6 @@ class BasicSnake {
         BoardPixel::State what;
     };
 
-    // Changes to the snake are queued up here and can then later be written to the state.
-    std::queue<GraphicsUpdate> graphicUpdates;
     std::deque<BodyPart> bodyParts;
 
     bool validStepTarget(const GraphicsBoard& board, Point target);
