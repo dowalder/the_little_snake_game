@@ -18,4 +18,4 @@ and you can play a very rudimentary version of snake with it.
 If you want to run the code, simply clone the nana repository into the nana folder at root level of the repo and 
 then build the `snake` executable with CMake. I tested it on Ubuntu 18.04.
 
-I added comments both for a docuemtation purpose as well to highlight certain shortcomings mostly in the OOP design.
+I added comments both for a documentation purpose as well to highlight certain shortcomings mostly in the OOP design.
