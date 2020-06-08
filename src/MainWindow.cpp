@@ -28,7 +28,7 @@ void MainWindow::performStep(){
         } else if (res == StepResult::STEPPED_INTO_FOOD) {
             std::optional<Point> foodLocation = sampleEmptyPixel(board);
             if (foodLocation.has_value()) {
-                board.getPixel(*foodLocation).set(BoardPixel::State::FOOD);
+                board.getTile(*foodLocation).set(BoardTile::State::FOOD);
             } else {
                 state = State::CONFIGURATION;
             }
@@ -91,7 +91,7 @@ void MainWindow::setupInitialSnake() {
         std::optional<Point> foodLocation = sampleEmptyPixel(board);
 
         if (foodLocation.has_value()) {
-            board.getPixel(*foodLocation).set(BoardPixel::State::FOOD);
+            board.getTile(*foodLocation).set(BoardTile::State::FOOD);
         } else {
             throw std::runtime_error("No empty tile left at start.");
         }

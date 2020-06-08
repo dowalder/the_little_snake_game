@@ -8,7 +8,7 @@ std::optional<Point> sampleEmptyPixel(const GraphicsBoard& board) {
     std::vector<Point> emptyPixels;
     for (int x = 0; x < board.getWidth(); ++x) {
         for (int y = 0; y < board.getHeight(); ++y) {
-            if (board.getPixel({x, y}).getState() == BoardPixel::State::EMPTY) {
+            if (board.getTile({x, y}).getState() == BoardTile::State::EMPTY) {
                 emptyPixels.emplace_back(x, y);
             }
         }

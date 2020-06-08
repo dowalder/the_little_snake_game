@@ -24,7 +24,7 @@ void BasicSnake::initSnakeOnBoard(GraphicsBoard& board) const {
     }
 
     for (const auto& part: bodyParts) {
-        board.getPixel(part.pos).set(BoardPixel::State::SNAKE);
+        board.getTile(part.pos).set(BoardTile::State::SNAKE);
     }
 }
 
@@ -35,15 +35,15 @@ StepResult BasicSnake::step(Direction dir, GraphicsBoard& board) {
         return StepResult::INVALID_STEP;
     }
 
-    BoardPixel::State oldState = board.getPixel(head()).getState();
+    BoardTile::State oldState = board.getTile(head()).getState();
 
-    board.getPixel(head()).set(BoardPixel::State::SNAKE);
+    board.getTile(head()).set(BoardTile::State::SNAKE);
 
-    if (oldState == BoardPixel::State::FOOD) {
+    if (oldState == BoardTile::State::FOOD) {
         return StepResult::STEPPED_INTO_FOOD;
     } else {
         // only remove the tail when no food was consumed
-        board.getPixel(tail()).set(BoardPixel::State::EMPTY);
+        board.getTile(tail()).set(BoardTile::State::EMPTY);
         bodyParts.pop_back();
         return StepResult::STEPPED_INTO_EMPTY;
     }
@@ -54,8 +54,8 @@ const Point& BasicSnake::tail() const { return bodyParts.back().pos; }
 
 bool BasicSnake::validStepTarget(const GraphicsBoard& board, Point target) {
     return pointInBoard(board, target) && 
-        (board.getPixel(target).getState() == BoardPixel::State::EMPTY 
-        || board.getPixel(target).getState() == BoardPixel::State::FOOD);
+        (board.getTile(target).getState() == BoardTile::State::EMPTY 
+        || board.getTile(target).getState() == BoardTile::State::FOOD);
 }
 
 }

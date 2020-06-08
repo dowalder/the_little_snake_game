@@ -20,7 +20,7 @@ struct Configuration {
     Direction initialDirection {Direction::DOWN};
 };
     
-
+/* The main application window that combines the different elements and owns the event loop. */
 class MainWindow {
   public:
     MainWindow();
@@ -29,7 +29,7 @@ class MainWindow {
     enum class State {
         SNAKE_STARTING,
         SNAKE_ACTIVE,
-        CONFIGURATION,
+        CONFIGURATION,  // Configuration state is planned but not implemented yet.
     } state {State::SNAKE_STARTING};
     
     static constexpr std::chrono::milliseconds samplingTime {5};
@@ -47,6 +47,7 @@ class MainWindow {
     Direction nextDirection {Direction::DOWN};
     Direction lastDirection;
 
+    /* The function to be called repeadetely by the nana timer. */
     void performStep();
     void onKeyPress(const nana::arg_keyboard& key);
 

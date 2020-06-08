@@ -2,22 +2,22 @@
 
 namespace snake {
 
-nana::color BoardPixel::foregroundColor(nana::colors::azure);
-nana::color BoardPixel::backgroundColor(nana::colors::black);
+nana::color BoardTile::foregroundColor(nana::colors::azure);
+nana::color BoardTile::backgroundColor(nana::colors::black);
 
-BoardPixel::BoardPixel(int locationX_, int locationY_) 
+BoardTile::BoardTile(int locationX_, int locationY_) 
 :   startX {locationX_ * pixelSize}, 
     startY {locationY_ * pixelSize},
     myRectangle{startX, startY, pixelSize, pixelSize}
 {}
 
-void BoardPixel::set(State newState) {
+void BoardTile::set(State newState) {
     state = newState;
 }
 
-BoardPixel::State BoardPixel::getState() const { return state; }
+BoardTile::State BoardTile::getState() const { return state; }
 
-void BoardPixel::draw(nana::paint::graphics& graph) {
+void BoardTile::draw(nana::paint::graphics& graph) {
     switch (state) {
         case State::EMPTY:
             drawBackground(graph);
@@ -33,15 +33,15 @@ void BoardPixel::draw(nana::paint::graphics& graph) {
     }
 }
 
-void BoardPixel::drawBackground(nana::paint::graphics& graph) {
+void BoardTile::drawBackground(nana::paint::graphics& graph) {
     graph.rectangle(myRectangle, true, backgroundColor);
 }
 
-void BoardPixel::drawSnake(nana::paint::graphics& graph) {
+void BoardTile::drawSnake(nana::paint::graphics& graph) {
     graph.rectangle(myRectangle, true, foregroundColor);
 }
 
-void BoardPixel::drawFood(nana::paint::graphics& graph) {
+void BoardTile::drawFood(nana::paint::graphics& graph) {
     graph.rectangle(myRectangle, true, foregroundColor);
 }
 
@@ -55,11 +55,11 @@ GraphicsBoard::GraphicsBoard(nana::window handle) : drawing {handle} {
     });
 }
 
-BoardPixel& GraphicsBoard::getPixel(const Point& p) {
+BoardTile& GraphicsBoard::getTile(const Point& p) {
     return pixels.at(p.x * height + p.y);
 }
 
-const BoardPixel& GraphicsBoard::getPixel(const Point& p) const {
+const BoardTile& GraphicsBoard::getTile(const Point& p) const {
     return pixels.at(p.x * height + p.y);
 }
 
@@ -68,7 +68,7 @@ void GraphicsBoard::update() const {
 }
 
 void GraphicsBoard::createPixels() {
-    graphics.resize({width * BoardPixel::pixelSize, height * BoardPixel::pixelSize});
+    graphics.resize({width * BoardTile::pixelSize, height * BoardTile::pixelSize});
     pixels.clear();
     pixels.reserve(height * width);
     for (int h = 0; h < height; ++h) {
