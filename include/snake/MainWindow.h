@@ -122,7 +122,6 @@ class MainWindow {
     void setupInitialSnake() {
         snake.setInitialPosition(conf.initialHead, conf.initialTail);
         snake.initSnakeOnBoard(board);
-        std::cout << "hi" << std::endl;
         nextDirection = conf.initialDirection;
         lastDirection = conf.initialDirection;
 

@@ -42,7 +42,6 @@ class BasicSnake {
 
     StepResult step(Direction dir, GraphicsBoard& board) {
         bodyParts.emplace_front(incrementPointWithStep(head(), dir));
-        std::cout << "hello" << std::endl;
 
         if (!validStepTarget(board, head())) {
             return StepResult::INVALID_STEP;
