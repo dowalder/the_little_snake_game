@@ -1,7 +1,5 @@
  #pragma once
 
-#include <iostream>
-
 #include "nana/gui.hpp"
 #include "nana/paint/graphics.hpp"
 
@@ -11,11 +9,7 @@ namespace snake {
 
 class BoardPixel {
   public:
-    BoardPixel(int locationX_, int locationY_) 
-    :   startX {locationX_ * pixelSize}, 
-        startY {locationY_ * pixelSize},
-        myRectangle{startX, startY, pixelSize, pixelSize}
-    {}
+    BoardPixel(int locationX_, int locationY_);
 
     enum class State {
         SNAKE,
@@ -23,28 +17,11 @@ class BoardPixel {
         EMPTY
     };
 
-    void set(State newState) {
-        state = newState;
-    }
+    void set(State newState);
 
-    State getState() const { return state; }
+    State getState() const;
 
-    void draw(nana::paint::graphics& graph) {
-
-        switch (state) {
-            case State::EMPTY:
-                drawBackground(graph);
-                break;
-            case State::FOOD:
-                drawFood(graph);
-                break;
-            case State::SNAKE:
-                drawSnake(graph);
-                break;
-            default:
-                throw std::runtime_error("Invalid state of Boardpixel.");
-        }
-    }
+    void draw(nana::paint::graphics& graph);
 
     static nana::color foregroundColor;
     static nana::color backgroundColor;
@@ -56,68 +33,34 @@ class BoardPixel {
     const int startY = 0;
     nana::rectangle myRectangle;
 
-    void drawBackground(nana::paint::graphics& graph) {
-        graph.rectangle(myRectangle, true, backgroundColor);
-    }
-
-    void drawSnake(nana::paint::graphics& graph) {
-        graph.rectangle(myRectangle, true, foregroundColor);
-    }
-
-    void drawFood(nana::paint::graphics& graph) {
-        graph.rectangle(myRectangle, true, foregroundColor);
-    }
+    void drawBackground(nana::paint::graphics& graph);
+    void drawSnake(nana::paint::graphics& graph);
+    void drawFood(nana::paint::graphics& graph);
 };
-
-nana::color BoardPixel::foregroundColor(nana::colors::azure);
-nana::color BoardPixel::backgroundColor(nana::colors::black);
 
 
 class GraphicsBoard {
   public:
-    GraphicsBoard(nana::window handle) : drawing {handle} {
-        createPixels();
-        
-        drawing.draw([this](nana::paint::graphics& graph) {
-            for (auto& pixel : pixels) {
-                pixel.draw(graph);
-            }
-        });
-    }
+    GraphicsBoard(nana::window handle);
 
-    BoardPixel& getPixel(const Point& p) {
-        return pixels.at(p.x * height + p.y);
-    }
-    const BoardPixel& getPixel(const Point& p) const {
-        return pixels.at(p.x * height + p.y);
-    }
+    BoardPixel& getPixel(const Point& p);
+    const BoardPixel& getPixel(const Point& p) const;
 
-    void update() const {
-        drawing.update();
-    }
+    void update() const;
 
     int getWidth() const { return width; }
     int getHeight() const { return height; }
 
   private:
-    int height = 20;
-    int width = 20;
+    const int height = 20;
+    const int width = 20;
 
     nana::paint::graphics graphics;
     nana::drawing drawing;
 
-    void createPixels() {
-        graphics.resize({width * BoardPixel::pixelSize, height * BoardPixel::pixelSize});
-        pixels.clear();
-        pixels.reserve(height * width);
-        for (int h = 0; h < height; ++h) {
-            for (int w = 0; w < width; ++w) {
-                pixels.emplace_back(h, w);
-            }
-        }
-    }
-
     std::vector<BoardPixel> pixels;
+
+    void createPixels();
 };
 
 
